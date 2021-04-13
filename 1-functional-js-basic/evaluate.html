@@ -1,0 +1,32 @@
+<script>
+  // 평가와 일급
+
+  // 평가
+  // 평가는 코드가 '계산'되어 값을 만드는 것
+
+  // 일급
+  // '값'으로 다뤄질 수 있다. 값으로 담을 수 있기에 '변수'와 '인자'에 담을 수 있다. 그리고 '결과'로 표현할 수 있다.
+
+  // 일급 함수
+  // 함수는 일급이다. 즉, 일급의 역할을 수행할 수 있다.
+
+  const f1 = () => 1;
+  console.log(f1); // () => 1;
+  console.log(f1()); // 1
+  // 변수에 담기며 인자로 전달될 수 있고, 원하는 시점에 평가를 값을 만들 수 있다.\
+
+  const f2 = (a) => (b) => a + b;
+  const setAParam = f2(1);
+  console.log(setAParam); // b => a + b;
+  const setBParam = setAParam(3);
+  console.log(setBParam);
+  // 클로저를 형성 할 수 있다.
+
+  const times = (f, n) => {
+    i = -1;
+    while (++i < n) f(i);
+  };
+
+  times(console.log, 3);
+  //함수의 인자로 함수를 전달하는 고차함수도 가능하다.
+</script>
