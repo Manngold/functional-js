@@ -1,0 +1,15 @@
+<script>
+  const log = console.log;
+</script>
+ES6의 순회와 이터러블 ES6 이전의 for문 순회는 '어떻게' 순회를 할 것인가에 대해서
+포커스를 뒀다면 ES6의 for문은 '무엇을' 순회하는지에 포커스를 둔 것을 확인할 수
+있다.
+<script>
+  const foo = [1, 2, 3];
+  for (var i = 0; i < foo.length; i++) {
+    log(foo[i]);
+  }
+  for (const item of foo) {
+    log(item);
+  }
+</script>
