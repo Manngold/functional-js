@@ -13,3 +13,60 @@ ES6의 순회와 이터러블 ES6 이전의 for문 순회는 '어떻게' 순회�
     log(item);
   }
 </script>
+
+## Array
+
+<script>
+  log('-----Array-----');
+  const arr = [1, 2, 3];
+  for (const item of arr) {
+    log(item);
+  }
+
+  //인덱스로 접근이 가능
+</script>
+
+## Set
+
+<script>
+  log('-----Set-----');
+  const set = new Set([1, 2, 3]);
+  for (const item of set) {
+    log(item);
+  }
+  const iter1 = set[Symbol.iterator](); //이터레이터를 반환
+  log(iter1.next()); // value와 done 값이 들어간 객체를 리턴
+</script>
+
+## Map
+
+<script>
+  log('-----Map-----');
+  const map = new Map([
+    ['a', 1],
+    ['b', 2],
+    ['c', 3],
+  ]);
+
+  for (const item of map) {
+    log(item);
+  }
+  const iter2 = map[Symbol.iterator](); //key와 value가 있는 iterator를 반환
+  log(iter2);
+  const iter3 = map.keys()[Symbol.iterator](); // key만 있는 iterator를 반환
+  log(iter3);
+  //즉 map.keys()를 통한 key값을 추출해도 iterator가 존재하기 때문에 for of로 순회가 가능하다.
+  for (const key of map.keys()) {
+    log(key);
+  }
+</script>
+
+array는 인덱스 접근이 가능하지만 set map은 인덱스 접근이 불가능함
+<br />
+next() 메소드를 가진 iterator를 통해서 index 접근 방식에서 벗어난 순회가
+가능해진다.
+<br />
+next()를 실행하면 {value, done}을 리턴하게 된다.
+<br />
+이터러블을 for of 와 전개연산자와 함께 동작하도록 하는 규약이 이터러블
+이터레이터 프로토콜이다.
