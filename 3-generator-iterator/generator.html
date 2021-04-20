@@ -1,0 +1,58 @@
+<script>
+  const log = console.log;
+</script>
+
+제너레이터 = 이터레이터이자 이터레이터를 생성하는 함수(함수명 앞에 *을 붙여서
+만든다.)
+
+<script>
+  function* gen() {
+    yield 1;
+    yield 2;
+    yield 3;
+    yield 4;
+  }
+  // 어떤 값이라도 선언적으로 iterator를 만들 수 있게 된다.
+  const a = gen();
+  const iter = a[Symbol.iterator]();
+
+  // 다음과 같이 활용 할 수도 있다.
+  function* infinity(i = 0) {
+    while (true) yield ++i;
+  }
+  function* limit(l, iter) {
+    for (const a of iter) {
+      yield a;
+      if (a == l) return;
+    }
+  }
+  function* odd(l) {
+    for (const a of limit(l, infinity())) {
+      if (a % 2) yield a;
+    }
+  }
+
+  const iter2 = odd(10);
+  for (const a of iter2) {
+    log(a);
+  }
+  // 제너레이터를 활용함으로서 배열이 아닌 값들을 선언적으로 이터러블하게 만들고 어떠한 시점에서 판단하여 값을 도출할 수 있게 되었다.
+
+  function* pow(l) {
+    for (const a of limit(l, infinity())) {
+      yield a ** 2;
+    }
+  }
+  const iter3 = pow(5);
+  for (const a of iter3) {
+    log(a);
+  }
+
+  //전개연산자, 구조분해, 나머지연산자는 이터러블 이터레이터 프로토콜을 따르므로 다음과 같이 활용이 가능하다
+
+  const arr = [...pow(3)];
+  log(arr);
+  log(...pow(8));
+  const [head, ...rest] = pow(4);
+  log(head, rest);
+</script>
