@@ -40,3 +40,42 @@ Map은 이터러블/이터레이터 프로토콜에서 보조함수를 통해서
   log(productName);
   log(productPrice);
 </script>
+
+map과 다형성
+
+<script>
+  const dom = document.querySelectorAll('*');
+  log(dom);
+  // 배열처럼 보이나 Array를 상속받지 않았기 때문에 .map 메소드를 사용할 수 없다
+
+  //하지만 이터러블/이터레이터 프로토콜을 따르므로 커스텀 map 함수가 작동할 수 있다.
+  //따라서 이터러블/이터레이터 프로토콜을 활용한다면 부모나 데이터 타입에서 벗어나 자유롭게 활용할 수 있게 된다.
+
+  const domArr = map((a) => a, dom);
+  log(domArr);
+
+  function* gen() {
+    yield 2;
+    yield 4;
+    yield 6;
+    yield 8;
+  }
+
+  const double = map((a) => a * 2, gen());
+
+  log(double);
+
+  const m = new Map();
+  m.set('a', 20);
+  m.set('b', 40);
+  log(m);
+
+  const doubleM = map(([k, v]) => [k, v * 2], m);
+  //Map은 이터러블 이터레이터 프로토콜을 따르고 있기에 구조분해가 가능하다
+  // 따라서 key와 value를 나누고 value 값에 작업을 할 수 있고
+
+  // 이는 또한 배열을 리턴하기 때문에 다시 Map이 될 수 있다.
+
+  const mapDoubleM = new Map(doubleM);
+  log(mapDoubleM);
+</script>
