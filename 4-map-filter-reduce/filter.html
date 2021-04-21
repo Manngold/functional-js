@@ -1,0 +1,27 @@
+<script>
+  const log = console.log;
+</script>
+
+강의 듣기 전 filter 함수 구현해보기
+
+<script>
+  const products = [
+    { name: 'boo', price: 3000 },
+    { name: 'foo', price: 4000 },
+    { name: 'poo', price: 5000 },
+    { name: 'doo', price: 6000 },
+    { name: 'zoo', price: 7000 },
+  ];
+
+  const filter = (f, iter) => {
+    let res = [];
+    for (const a of iter) {
+      f(a) && res.push(a);
+    }
+    return res;
+  };
+
+  const over5000 = filter((item) => item.price >= 5000, products);
+
+  log(over5000);
+</script>
