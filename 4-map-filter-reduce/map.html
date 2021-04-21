@@ -1,0 +1,42 @@
+<script>
+  const log = console.log;
+</script>
+
+Map은 이터러블/이터레이터 프로토콜에서 보조함수를 통해서 새로운 배열을 반환한다.
+
+<script>
+  const products = [
+    { name: 'boo', price: 3000 },
+    { name: 'foo', price: 4000 },
+    { name: 'poo', price: 5000 },
+    { name: 'doo', price: 6000 },
+    { name: 'zoo', price: 7000 },
+  ];
+
+  let names = [];
+  for (const a of products) {
+    names.push(a.name);
+  }
+  log(names);
+
+  let prices = [];
+  for (const a of products) {
+    prices.push(a.price);
+  }
+  log(prices);
+
+  // 보조함수와, 이터러블을 받으면서 map 함수를 구현할 수 있다.
+
+  const map = (f, iter) => {
+    let res = [];
+    for (const a of iter) {
+      res.push(f(a));
+    }
+    return res;
+  };
+
+  const productName = map((item) => item.name, products);
+  const productPrice = map((item) => item.price, products);
+  log(productName);
+  log(productPrice);
+</script>
