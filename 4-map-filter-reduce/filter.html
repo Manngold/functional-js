@@ -16,12 +16,11 @@
   const filter = (f, iter) => {
     let res = [];
     for (const a of iter) {
-      f(a) && res.push(a);
+      if (f(a)) res.push(a);
     }
     return res;
   };
 
   const over5000 = filter((item) => item.price >= 5000, products);
-
   log(over5000);
 </script>
