@@ -1,0 +1,34 @@
+<script>
+  const log = console.log;
+</script>
+
+reduce
+
+<script>
+  const arr = [1, 2, 3, 4, 5];
+
+  // const reducer = (f, acc, iter) => {
+  //   for (const a of iter) {
+  //     acc = f(a, acc);
+  //   }
+  //   return acc;
+  // };
+
+  const add = (a, b) => a + b;
+
+  // 기존 js는 acc parameter를 optional한 값으로 받는다.
+  // 없을 경우 iter의 첫번째 값을 acc에 할당한다.
+
+  const reducer = (f, acc, iter) => {
+    if (!iter) {
+      iter = acc[Symbol.iterator]();
+      acc = iter.next().value;
+    }
+    for (const a of iter) {
+      acc = f(a, acc);
+    }
+    return acc;
+  };
+  const res = reducer(add, arr);
+  log(res);
+</script>
