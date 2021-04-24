@@ -1,0 +1,41 @@
+<script>
+  const log = console.log;
+</script>
+
+파이프 함수는 go 함수에서 인자에 직접 함수를 전달 받을 때, 모든 함수를 축약해서
+전달 할 수 있게 한다.
+
+<script>
+  const reduce = (f, acc, iter) => {
+    if (!iter) {
+      iter = acc[Symbol.iterator]();
+      acc = iter.next().value;
+    }
+
+    for (const a of iter) {
+      acc = f(acc, a);
+    }
+
+    return acc;
+  };
+
+  const go = (...args) => reduce((a, f) => f(a), args);
+  const pipe = (...fs) => (a) => go(a, ...fs);
+  // 고차함수를 통해 클로저 형성 => pipe로 묶은 함수 값들 기억하기
+
+  go(
+    0,
+    (a) => a + 1,
+    (a) => a + 10,
+    (a) => a + 100,
+    log
+  );
+
+  const f = pipe(
+    (a) => a + 1,
+    (a) => a + 10,
+    (a) => a + 100,
+    log
+  );
+  f(0);
+</script>
