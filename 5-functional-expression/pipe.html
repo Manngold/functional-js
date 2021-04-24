@@ -20,22 +20,21 @@
   };
 
   const go = (...args) => reduce((a, f) => f(a), args);
-  const pipe = (...fs) => (a) => go(a, ...fs);
+  const pipe = (f, ...fs) => (...as) => go(f(...as), ...fs);
   // 고차함수를 통해 클로저 형성 => pipe로 묶은 함수 값들 기억하기
 
   go(
-    0,
-    (a) => a + 1,
+    1,
     (a) => a + 10,
     (a) => a + 100,
     log
   );
 
   const f = pipe(
-    (a) => a + 1,
+    (a, b) => a + b,
     (a) => a + 10,
     (a) => a + 100,
     log
   );
-  f(0);
+  f(0, 1);
 </script>
