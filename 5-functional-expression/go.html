@@ -1,0 +1,40 @@
+<script>
+  const log = console.log;
+</script>
+
+이전 map filter reduce 함수를 중첩 사용처럼 함께 쓰면 코드의 가독성이 떨어지게
+된다. go 인자 배열을 순회하면서 코드를 축약하고 표현력을 높인다.
+
+<script>
+  const reduce = (f, acc, iter) => {
+    if (!iter) {
+      iter = acc[Symbol.iterator]();
+      acc = iter.next().value;
+    }
+
+    for (const a of iter) {
+      acc = f(acc, a);
+    }
+
+    return acc;
+  };
+
+  const go = (...args) => {
+    // args = iterable
+    // acc
+    reduce((a, f) => f(a), args);
+  };
+
+  // reduce 함수의 내부 이해도가 낮아서 어려움이 있었음
+  // ...args로 표현하면서 args는 iterable하게 된다.
+  // reduce에 인자를 두 개 받아서 f(a)를 해주는 함수를 만든다.
+  go(
+    0, //reduce 함수에 acc 값이 들어가지 않으므로 0이 acc가 된다.
+    (a) => a + 1, //인자로 받은 함수에 acc와 a => a + 1이 인자값으로 전달 즉 acc = acc => acc + 1이 된다.
+    (a) => a + 10, // 동일
+    (a) => a + 100, // 동일
+    log // log(acc)
+  );
+</script>
+
+go를 통해서 많은 함수를 축약하면서 실행해나간다. 개인적으로 어려웠던 부분
