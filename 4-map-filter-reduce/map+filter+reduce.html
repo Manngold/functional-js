@@ -1,0 +1,25 @@
+<script src="./fx.js"></script>
+
+함수 중첩사용과 함수형 프로그래밍 사고법
+
+<script>
+  const products = [
+    { name: 'boo', price: 3000 },
+    { name: 'foo', price: 4000 },
+    { name: 'poo', price: 5000 },
+    { name: 'doo', price: 6000 },
+    { name: 'zoo', price: 7000 },
+  ];
+
+  const add = (a, b) => a + b;
+  log(
+    reducer(
+      add,
+      map(
+        (p) => p.price,
+        filter((p) => p.price < 5000, products)
+      )
+    )
+  );
+</script>
+함수를 실행되는 순간에 어떠한 값이 판단될 것이라는 기대를 하고 코드를 작성하자.
