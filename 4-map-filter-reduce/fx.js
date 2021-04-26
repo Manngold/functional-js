@@ -22,7 +22,7 @@ const reducer = (f, acc, iter) => {
     acc = iter.next().value;
   }
   for (const a of iter) {
-    acc = f(a, acc);
+    acc = f(acc, a);
   }
   return acc;
 };

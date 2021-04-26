@@ -21,5 +21,17 @@
       )
     )
   );
+
+  const go = (...args) => reducer((a, f) => f(a), args);
+
+  // go를 활용한 코드 개선
+
+  go(
+    products,
+    (products) => map((product) => product.price, products),
+    (products) => filter((price) => price <= 5000, products),
+    (prices) => reducer(add, prices),
+    log
+  );
 </script>
 함수를 실행되는 순간에 어떠한 값이 판단될 것이라는 기대를 하고 코드를 작성하자.
