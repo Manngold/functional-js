@@ -33,5 +33,15 @@
     (prices) => reducer(add, prices),
     log
   );
+
+  //curry를 활용한 코드 개선
+
+  go(
+    products,
+    map((product) => product.price),
+    filter((price) => price <= 5000),
+    reducer(add),
+    log
+  );
 </script>
 함수를 실행되는 순간에 어떠한 값이 판단될 것이라는 기대를 하고 코드를 작성하자.
