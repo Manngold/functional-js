@@ -1,0 +1,33 @@
+<script src="../4-map-filter-reduce/fx.js"></script>
+
+range와 L.range
+
+<script>
+  // range
+  const range = (l) => {
+    let i = -1;
+    let res = [];
+    while (++i < l) {
+      log(i);
+      res.push(i);
+    }
+    return res;
+  };
+  log(range(5)); // log를 확인해보면 함수를 실행하면서 while문이 돌고 배열로 평가가 됨
+  log(reduce(add, range(5)));
+</script>
+
+<script>
+  // L.range
+
+  const L = {};
+  L.range = function* (l) {
+    let i = -1;
+    while (++i < l) {
+      log(i);
+      yield i;
+    }
+  };
+  log(L.range(5)); // 배열로 평가가 되지 않았으며 이터러블을 리턴한다.
+  log(reduce(add, L.range(5))); //이터레이터를 통해 reduce함수 안에서 평가가 되어서 리턴이 된다.
+</script>

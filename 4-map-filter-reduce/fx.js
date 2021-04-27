@@ -1,5 +1,7 @@
 const log = console.log;
 
+const add = (a, b) => a + b;
+
 const curry = (f) => (a, ..._) =>
   _.length ? f(a, ..._) : (..._) => f(a, ..._);
 
