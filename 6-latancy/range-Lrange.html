@@ -14,7 +14,7 @@ range와 L.range
     return res;
   };
   log(range(5)); // log를 확인해보면 함수를 실행하면서 while문이 돌고 배열로 평가가 됨
-  log(reduce(add, range(5)));
+  log(reduce(add, range(5))); //배열로 평가된 값을 reduce에 전달하면 배열이 이터레이터로 변환되는 과정을 추가적으로 거친 뒤, 평가가 된다.
 </script>
 
 <script>
