@@ -11,7 +11,7 @@
     { name: '후드티', price: 2000, quantity: 3 },
   ];
 
-  const go = (...args) => reducer((a, f) => f(a), args);
+  const go = (...args) => reduce((a, f) => f(a), args);
 
   const add = (a, b) => a + b;
 
@@ -20,14 +20,14 @@
   go(
     products,
     map((p) => p.price),
-    reducer(add),
+    reduce(add),
     log
   ); // 총 가격 구하기
 
   go(
     products,
     map((p) => p.quantity),
-    reducer(add),
+    reduce(add),
     log
   ); // 총 수량 구하기
 
@@ -37,7 +37,7 @@
     products,
     pipe(
       map((p) => p.price),
-      reducer(add),
+      reduce(add),
       log
     )
   );
@@ -46,19 +46,19 @@
     products,
     pipe(
       map((p) => p.quantity),
-      reducer(add),
+      reduce(add),
       log
     )
   );
 
   // 중복을 제거하면서 추상화 레벨 높이기
 
-  const getTotal = (f, iter) => go(iter, pipe(map(f), reducer(add), log));
+  const getTotal = (f, iter) => go(iter, pipe(map(f), reduce(add), log));
   getTotal((p) => p.price, products);
 
   // curry와 함수 조합을 통한 리팩토링
 
-  const sum = curry((f, iter) => go(iter, map(f), reducer(add)));
+  const sum = curry((f, iter) => go(iter, map(f), reduce(add)));
 
   const totalPrice = sum((p) => p.price);
   const totalQuantity = sum((p) => p.quantity);

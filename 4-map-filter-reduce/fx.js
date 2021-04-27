@@ -19,7 +19,7 @@ const filter = curry((f, iter) => {
   return res;
 });
 
-const reducer = curry((f, acc, iter) => {
+const reduce = curry((f, acc, iter) => {
   if (!iter) {
     iter = acc[Symbol.iterator]();
     acc = iter.next().value;

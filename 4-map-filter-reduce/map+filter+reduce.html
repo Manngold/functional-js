@@ -13,7 +13,7 @@
 
   const add = (a, b) => a + b;
   log(
-    reducer(
+    reduce(
       add,
       map(
         (p) => p.price,
@@ -22,7 +22,7 @@
     )
   );
 
-  const go = (...args) => reducer((a, f) => f(a), args);
+  const go = (...args) => reduce((a, f) => f(a), args);
 
   // go를 활용한 코드 개선
 
@@ -30,7 +30,7 @@
     products,
     (products) => map((product) => product.price, products),
     (products) => filter((price) => price <= 5000, products),
-    (prices) => reducer(add, prices),
+    (prices) => reduce(add, prices),
     log
   );
 
@@ -40,7 +40,7 @@
     products,
     map((product) => product.price),
     filter((price) => price <= 5000),
-    reducer(add),
+    reduce(add),
     log
   );
 </script>
