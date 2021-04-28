@@ -1,0 +1,20 @@
+<script>
+  const log = console.log;
+</script>
+
+원하는 시점에 값을 평가할 수 있는 L.map
+
+<script>
+  const L = {};
+  L.map = function* (f, iter) {
+    for (const a of iter) {
+      yield f(a);
+    }
+  };
+
+  const mult3 = L.map((a) => a * 3, [1, 2, 3]); //이 시점에는 평가가 되지 않는다
+  // 이후 이터러블을 활용해서 원하는 방식대로 평가가 가능
+  log([...mult3]);
+  // log(mult3.next().value);
+  // log([mult3.next().value, ...mult3]);
+</script>
