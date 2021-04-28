@@ -1,0 +1,17 @@
+<script>
+  const log = console.log;
+</script>
+
+L.filter
+
+<script>
+  const L = {};
+  L.filter = function* (f, iter) {
+    for (const a of iter) {
+      if (f(a)) yield a;
+    }
+  };
+
+  const odd = L.filter((a) => a % 2, [1, 2, 3, 4, 5]);
+  log([...odd]);
+</script>
