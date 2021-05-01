@@ -3,13 +3,20 @@
 query string 만드는 함수
 
 <script>
-  const queryStr = (obj) =>
-    go(
-      obj,
-      Object.entries,
-      map(([k, v]) => `${k}=${v}`),
-      reduce((a, b) => `${a}&${b}`)
-    );
+  const join = curry((sep = ',', iter) =>
+    reduce((a, b) => `${a}${sep}${b}`, iter)
+  );
+
+  L.entries = function* (obj) {
+    for (const k in obj) yield [k, obj[k]];
+    //iterable 객체 반환
+  };
+
+  const queryStr = pipe(
+    L.entries,
+    L.map(([k, v]) => `${k}=${v}`),
+    join('&')
+  );
 
   const query = { limit: 10, offset: 20, title: 'coding' };
 
