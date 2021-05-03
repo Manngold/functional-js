@@ -1,0 +1,21 @@
+<script src="../lib/fx.js"></script>
+
+spread operator 구현
+
+<script>
+  const isIterable = (a) => a && a[Symbol.iterator];
+
+  L.flatten = function* (iter) {
+    for (const a of iter) {
+      if (isIterable(a)) for (const b of a) yield b;
+      else yield a;
+    }
+  };
+
+  log(take(Infinity, L.flatten([[1, 3, 4], 1, 2, 3, [1, 4, 3], 1])));
+
+  //L.flatten을 활용한 flatten 구현
+
+  const flatten = pipe(L.flatten, takeAll);
+  log(flatten([[1, 3, 4], 1, 2, 3, [1, 4, 3], 1]));
+</script>
