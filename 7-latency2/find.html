@@ -22,4 +22,9 @@ L을 활용한 find 함수 구현
     find((a) => a < 30),
     log
   ); // curry를 통해 go 함수와 함께 활용 가능
+
+  const mUser = map((u) => u.age, users);
+  log(mUser);
+  const fUser = filter((u) => u.age < 30, users);
+  log(fUser);
 </script>
