@@ -1,0 +1,32 @@
+f(g(x)) 형식으로 함수 합성을 진행 할 때, 안전한 합성을 위해 모나드라는 개념이
+사용된다.
+
+<script>
+  const log = console.log;
+  const f = (a) => a * a;
+  const g = (a) => a + 1;
+
+  log(f(g(1))); // 4;
+  log(f(g())); // NaN
+
+  //함수 합성에서 예기치 못한 인자에 대응하지 못한 함수 합성은 올바르지 못한 함수 합성이다.
+  //따라서 안전한 함수 합성을 위한 대비책이 모나드이다.
+
+  //array를 활용한 모나드
+
+  [1]
+    .map(g)
+    .map(f)
+    .forEach((r) => log(r)); //array를 깨면서 안전한 함수 합성진행
+  []
+    .map(g)
+    .map(f)
+    .forEach((r) => log(r)); //실행조차 되지 않는다.
+
+  //모나드의 관점에서 promise
+
+  Promise.resolve(2).then(g).then(f).then(log); // 9
+  Promise.resolve().then(g).then(f).then(log); //값이 비어 있으면 똑같이 NaN
+
+  // Promise가 모나드를 위한 것이 아니라 비동기 상황에서 Promise를 통해 원하는 시점에서 값을 판단할 수 있다는 것이 초점을 맞추자
+</script>
