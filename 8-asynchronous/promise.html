@@ -1,0 +1,23 @@
+promise 값으로 활용하기
+
+<script>
+  const log = console.log;
+  // const go1 = (a, f) => f(a);
+
+  const go1 = (a, f) => (a instanceof Promise ? a.then(f) : f(a)); // 비동기 값임을 판단하고 로직을 수행할 수 있다.
+
+  const add5 = (a) => a + 5;
+  go1(10, add5);
+
+  const delay100 = (a) =>
+    new Promise((resolve) => setTimeout(() => resolve(a), 100));
+  go1(delay100(10), add5); // 비동기 상황에서 promise를 반환한다.
+
+  const n1 = 10;
+  const n2 = delay100(10);
+
+  go1(go1(n1, add5), log);
+  go1(go1(n2, add5), log);
+
+  // 일급인 promise를 통해 값으로 판단하여 비동기 코드와 동기 코드가 같은 방식으로 표현될 수 있게 되었다.
+</script>
