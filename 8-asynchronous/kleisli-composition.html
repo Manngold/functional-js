@@ -1,0 +1,22 @@
+<script src="../lib/fx.js"></script>
+kleisli composition : 오류가 나는 상황까지 고려해서 안전한 함수 합성을 할 수
+있다.
+
+<script>
+  const users = [
+    { id: 1, name: 'aaa' },
+    { id: 2, name: 'bbb' },
+    { id: 3, name: 'ccc' },
+  ];
+  const find = curry((f, iter) => go(iter, L.filter(f), take(1), ([a]) => a));
+  const getUserId = (id) =>
+    find((u) => u.id == id, users) || Promise.reject('없음!');
+
+  const f = ({ name }) => name;
+  const g = getUserId;
+  const fg = (id) => Promise.resolve(id).then(g).then(f).then(log);
+  fg(2);
+  // users.pop();
+  // users.pop();
+  // fg(2);
+</script>
