@@ -1,0 +1,13 @@
+<script src="../lib/fx.js"></script>
+
+L.filter + Promise
+
+<script>
+  go(
+    [1, 2, 3, 4, 5, 6, 7],
+    map((a) => Promise.resolve(a * a)),
+    L.filter((a) => a % 2),
+    takeAll,
+    log
+  );
+</script>
