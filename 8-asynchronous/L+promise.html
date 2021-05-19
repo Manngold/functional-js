@@ -1,0 +1,25 @@
+<script src="../lib/fx.js"></script>
+
+지연평가와 L.map, map, take
+
+<script>
+  go(
+    [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)],
+    L.map((a) => a + 10),
+    take(2),
+    log
+  );
+
+  go(
+    [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)],
+    map((a) => Promise.resolve(a + 10)),
+    take(3),
+    log
+  );
+
+  go(
+    [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)],
+    map((a) => Promise.resolve(a + 10)),
+    log
+  );
+</script>
